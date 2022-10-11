@@ -4,36 +4,17 @@ import math
 import time
 
 
-def validateOwn(pn2):
-    """
-    param pn2: integer positive integers
-    return: boolean if it has factors
-    """
-    pr_sqrt = int(math.sqrt(pn2) + 1)
-    pnl = []
-    for rn in range(1, pr_sqrt):
-        if rn % 2 != 0:
-            if pn2 % rn != 0:
-                break
-            else:
-                pnl.append([rn, pn2])
-    return len(pnl) > 1
-
-
 def validate(pn2):
     """
     param pn2: integer positive integers
     return: boolean if it has factors
     """
     pr_sqrt = int(math.sqrt(pn2) + 1)
-    pnl = []
-    for rn in range(1, pr_sqrt):
+    for rn in range(2, pr_sqrt):
         if rn % 2 != 0:
-            if pn2 % rn != 0:
-                break
-            else:
-                pnl.append([rn, pn2])
-    return len(pnl) > 1
+            if pn2 % rn == 0:
+                return True
+    return False
 
 
 def next_prime(number):
@@ -85,7 +66,10 @@ def test():
               107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223,
               227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307]
     print(prime_numbers_list == primes)
-    print('Test Successful!')
+    if prime_numbers_list == primes:
+        print('Test Successful!')
+    else:
+        print('Test Failed!')
 
 
 def prime_num_time_consuming():

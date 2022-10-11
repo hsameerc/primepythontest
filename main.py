@@ -4,25 +4,42 @@ import math
 import time
 
 
+def validateOwn(pn2):
+    """
+    param pn2: integer positive integers
+    return: boolean if it has factors
+    """
+    pr_sqrt = int(math.sqrt(pn2) + 1)
+    pnl = []
+    for rn in range(1, pr_sqrt):
+        if rn % 2 != 0:
+            if pn2 % rn != 0:
+                break
+            else:
+                pnl.append([rn, pn2])
+    return len(pnl) > 1
+
+
 def validate(pn2):
     """
-    :param pn2: integer
-    :return: boolean
+    param pn2: integer positive integers
+    return: boolean if it has factors
     """
-    xpn = int(math.sqrt(pn2) + 1)
+    pr_sqrt = int(math.sqrt(pn2) + 1)
     pnl = []
-    for rn in range(1, xpn):
-        # TODO:: rn should be prime. Now its odd numbers only
-        if rn < xpn and rn % 2 != 0:
-            if pn2 % rn == 0:
+    for rn in range(1, pr_sqrt):
+        if rn % 2 != 0:
+            if pn2 % rn != 0:
+                break
+            else:
                 pnl.append([rn, pn2])
     return len(pnl) > 1
 
 
 def next_prime(number):
     """
-    :param number: integer
-    :return: next prime integer
+    param number: integer to know next prime
+    return: next prime integer
     """
     if number % 2 == 0:
         number = number + 1
@@ -41,10 +58,10 @@ def next_prime(number):
 
 def get_primes_between(a, b, c):
     """
-    :param a: Start
-    :param b: End
-    :param c: Range
-    :return: integer
+    param a: integer Between Start
+    param b: integer Between End
+    param c: integer How many prime numbers
+    return: list of prime numbers
     """
     if a % 2 == 0:
         a = a + 1
@@ -53,7 +70,7 @@ def get_primes_between(a, b, c):
     for d in range(a, b):
         if a < d and d % 2 != 0:
             a = next_prime(a)
-            if c == -1 or count <= c:
+            if c == -1 or c >= count:
                 px.append(a)
                 count = count + 1
             else:

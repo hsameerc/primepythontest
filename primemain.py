@@ -1,3 +1,7 @@
+# This is a Python Script to generate positive prime numbers between given two numbers and number of prime numbers you
+# desire between those numbers.
+import time
+
 from logics import get_primes_between
 
 
@@ -18,3 +22,13 @@ def prime_num_time_consuming():
     return [i for i in range(2, pow(10, 5)) if 0 not in [
         i % np for np in range(2, i)
     ]]
+
+
+if __name__ == '__main__':
+    test()
+    n = 1
+    start_time = time.time()
+    pnb = get_primes_between(n, n + pow(10, 6), -1)
+    print(pnb)
+    print(len(pnb))
+    print("--- %s seconds ---" % (time.time() - start_time))

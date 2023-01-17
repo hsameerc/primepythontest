@@ -1,6 +1,6 @@
 # This is a Python Script to generate positive prime numbers between given two numbers and number of prime numbers you
 # desire between those numbers.
-from Chars import dataset
+from chars import dataset
 from logics import keygen, enc, get_primes_between
 
 

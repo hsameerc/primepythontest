@@ -1,3 +1,4 @@
+import unicodedata
 def chars():
     return 'thequickbrownfxjmpsvlazydg'
 
@@ -15,5 +16,9 @@ def num_array():
 
 
 def dataset():
-    val = chars__cap_array() + chars__small_array() + num_array()
+    val =  chars__cap_array() + chars__small_array() + num_array() + special_chars_array()
     return val
+
+
+def special_chars_array():
+    return [" ", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", "\\", ";", ":", "'", '"', ",", "<", ">", ".", "?", "/", "~", "`"]

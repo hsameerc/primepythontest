@@ -1,5 +1,7 @@
 # This is a Python Script to generate positive prime numbers between given two numbers and number of prime numbers you
 # desire between those numbers.
+import base64
+
 from chars import dataset
 from logics import keygen, enc, get_primes_between
 
@@ -37,7 +39,8 @@ class EncryptDecrypt:
             for dt_char, val in self.dataset_values_inverse:
                 if char == dt_char:
                     elements_value.append([char, val])
-
+        print(input_data)
+        print(self.dataset_values_inverse)
         list_dataset_encrypted_array = [encrypt(value, self._e, self._primary_key) for (key, value) in elements_value]
         return list_dataset_encrypted_array
 
@@ -54,16 +57,26 @@ class EncryptDecrypt:
 
 
 if __name__ == '__main__':
-    # e, d, primary_key = keygen()
+    # TODO:: FOR SPECIAL CHARS
+    input_raw = 'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 _+=-*()'
+    e, d, primary_key = keygen(2039, 17)
+    print(e, d, primary_key)
+    # exit()
     print("+++++++++++++++++++++")
-    e, primary_key = 17, 271271
+    # e, primary_key = 17, 271271
     encDecDataUsage = EncryptDecrypt(encrypt_key=e, decrypt_key=0, shared_primary_key=primary_key)
-    encrypted_array = encDecDataUsage.get_encrypted_data("HelloWorld")
-    print(encrypted_array)
+    encrypted_array = encDecDataUsage.get_encrypted_data(input_raw)
+
+    encrypted_array_bytes = bytes(str(encrypted_array), 'utf-8')
+    encoded_encrypted_bytes = base64.b64encode(encrypted_array_bytes)
+    print(encoded_encrypted_bytes)
+
     print("+++++++++++++++++++++")
-    d, primary_key = 492353, 271271
+    # d, primary_key = 492353, 271271
     decDecDataUsage = EncryptDecrypt(encrypt_key=0, decrypt_key=d, shared_primary_key=primary_key)
-    encrypted_array = [257211, 11958, 67645, 67645, 71233, 1644, 71233, 158594, 67645, 79792]
-    decrypted_array = decDecDataUsage.get_decrypted_data(encrypted_array)
-    print(decrypted_array)
+    # encoded_encrypted_bytes = b'WzI1NzIxMSwgMTE5NTgsIDY3NjQ1LCA2NzY0NSwgNzEyMzMsIDE2NDQsIDcxMjMzLCAxNTg1OTQsIDY3NjQ1LCA3OTc5MiwgMjUwNjE1LCAxOTM0MTYsIDE1Njc5MSwgMjQ5NDc4LCA3MjE4NiwgMTU2NzkxLCAxMTk1OCwgMTE5NTgsIDE1ODU5NCwgMjU3MjExLCAyMDM3MjIsIDE1Njc5MSwgNzIxODYsIDIzODgxOCwgNzIxODYsIDgxMTgzLCAyMjQ3MDFd'
+    decoded_encrypted_bytes = base64.b64decode(encoded_encrypted_bytes)
+    decoded_encrypted_array = eval(decoded_encrypted_bytes.decode('utf-8'))
+    decrypted_array = decDecDataUsage.get_decrypted_data(decoded_encrypted_array)
+    print("".join(map(str, decrypted_array)))
     print("+++++++++++++++++++++")
